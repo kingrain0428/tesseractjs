@@ -1,0 +1,2 @@
+# tesseractjs
+browser-ocr
