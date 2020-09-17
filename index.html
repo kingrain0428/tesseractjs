@@ -1,0 +1,44 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-09-16 16:40:36
+ * @LastEditTime: 2020-09-17 09:52:08
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /tesseractjs/index.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tesseractjs</title>
+</head>
+<body>
+   123 456
+</body>
+<script src='https://unpkg.com/tesseract.js@2.0.2/dist/tesseract.min.js'></script>
+
+<script>
+    const exampleImage = 'https://tesseract.projectnaptha.com/img/eng_bw.png';
+    // const exampleImage = 'http://upload.jmnews.cn/2020/0406/1586158796565.jpg';
+    console.log('123123123123123')
+    const worker = Tesseract.createWorker({
+        logger: m => console.log(m)
+    });
+    Tesseract.setLogging(true);
+    work();
+
+    async function work() {
+        await worker.load();
+        await worker.loadLanguage('eng');
+        await worker.initialize('eng');
+        let result = await worker.detect(exampleImage);
+        console.log(result.data);
+
+        result = await worker.recognize(exampleImage);
+        console.log('recognize', result.data);
+
+        await worker.terminate();
+    }
+</script>
+</html>
